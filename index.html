@@ -609,19 +609,17 @@
   /* ── Auto-play on first interaction ── */
   function startMusicOnce() {
     if (!playing) {
-      audio.volume = 0.4;
       audio.play().then(() => {
+        audio.volume = 0.4;
         playing = true;
         label.textContent = 'Pause Music';
         note.textContent = '🎶';
       }).catch(() => {});
     }
-    window.removeEventListener('scroll', startMusicOnce);
-    window.removeEventListener('touchstart', startMusicOnce);
+    window.removeEventListener('touchend', startMusicOnce);
     window.removeEventListener('click', startMusicOnce);
   }
-  window.addEventListener('scroll', startMusicOnce, { passive: true });
-  window.addEventListener('touchstart', startMusicOnce, { passive: true });
+  window.addEventListener('touchend', startMusicOnce, { passive: true });
   window.addEventListener('click', startMusicOnce);
 
   /* ── Hide scroll hint on scroll ── */
